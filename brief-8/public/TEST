@@ -1,0 +1,71 @@
+//     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// //         $nom = $_POST["nom"];
+// //         $password = password_hash($_POST['PW'], PASSWORD_DEFAULT); 
+// //         $confirm = password_hash($_POST['confirmPassword'], PASSWORD_DEFAULT); 
+    
+
+// //         $insert = "INSERT INTO MyUser (nom, PW,confirmPW) VALUES (  ?,?,?)";
+
+// //         $stmt = $conn->prepare($insert);
+// //         if ($stmt) {
+// //             $stmt->bind_param('sss', $nom, $password, $confirm);
+// //             if ($stmt->execute()) {
+// //                 echo "Les données ont été ajoutées avec succès.";
+// //             } else {
+// //                 echo "Erreur d'exécution de la requête : " . $stmt->error;
+// //             }
+// //             $stmt->close();
+// //         } else {
+// //             echo "Erreur de préparation de la requête : " . $conn->error;
+// //         }
+// // }
+
+
+
+//         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//             // Récupération des données du formulaire
+//             $nom = $_POST["nom"];
+//             $password = $_POST["PW"];
+//             $confirmPassword = $_POST["confirmPW"];
+
+//             // Validation des champs (vous pouvez ajouter plus de validation ici)
+//             if (!empty($nom) && !empty($PW) && ($PW === $confirmPW)) {
+//                 // Connexion à la base de données
+//                 $servername = "localhost";
+//                 $username = "ROOT";
+//                 $password = "";
+//                 $dbname = " DB_CIH";
+
+//                 // Création de la connexion
+//                 $conn = new mysqli($servername, $username, $password, $dbname);
+
+//                 // Vérification de la connexion
+//                 if ($conn->connect_error) {
+//                     die("Connexion échouée : " . $conn->connect_error);
+//                 }
+
+//                 // Hash du mot de passe avant insertion
+//                 $hashedPassword = password_hash($PW, PASSWORD_DEFAULT);
+//                 $hashedPassword = password_hash($confirmPW, PASSWORD_DEFAULT);
+
+//                 // Requête d'insertion dans la base de données
+//                 $insertQuery = "INSERT INTO MyUser (nom, PW,confirmPW) VALUES (?,?,?)";
+
+//                 // Utilisation des prepared statements pour éviter les injections SQL
+//                 $stmt = $conn->prepare($insertQuery);
+//                 $stmt->bind_param("sss", $nom, $hashedPassword );
+
+//                 // Exécution de la requête
+//                 if ($stmt->execute()) {
+//                     echo "Utilisateur enregistré avec succès.";
+//                 } else {
+//                     echo "Erreur lors de l'enregistrement de l'utilisateur : " . $stmt->error;
+//                 }
+
+//                 // Fermeture de la connexion et du statement
+//                 $stmt->close();
+//                 $conn->close();
+//             } else {
+//                 echo "Veuillez remplir tous les champs et confirmer le mot de passe correctement.";
+//             }
+//         }

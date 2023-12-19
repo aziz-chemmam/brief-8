@@ -1,0 +1,154 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+.logo img{
+   width: 15%;
+}
+.titre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+}
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70vh;
+    align-items: center;
+    width: 100%;
+
+}
+.body label{
+    font-size: medium;
+}
+.body input{
+    border-style: none  ;
+    border: 2px solid #009ee0;
+    border-radius: 30px;
+    width: 200px;
+    height: 30px;
+}
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+.btn{
+    position: absolute;
+    margin-top: 50px;
+    border: none;
+    font-size: larger;
+    background-color: white;
+    border: 1px double #e85412; 
+    background-color: #e85412;
+    border-radius: 30px;
+    width: 150px;
+    height: 35px;
+    cursor: pointer;
+    color: #021c27;
+}
+.btn:hover{
+   transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1);
+   width: 170px; 
+   height: 40px;
+   transition-duration: 0.5s;
+}
+.user img{
+    width: 48%;
+    height: auto;
+    border-radius: 50%;
+}
+.user{
+    width:20%;
+    height: 100vh;
+    background-color: #c5aeb0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 150px;
+
+}
+.user p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center ;  
+    border: 1px solid #e85412; 
+    width:306px;
+    cursor: pointer;
+    color: #e85412;
+}
+.user p:hover{
+    color:#009ee0;
+}
+aside{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.page{
+    display: flex;
+}
+table{
+    border:1px solid #009ee0;
+    height: fit-content;
+    width: 50%;
+    margin-top:150px;
+    margin-left: 15%;
+    font-size: large;
+    
+}
+
+tr,td{
+   border: 1px solid #009ee0;
+   text-align: center;
+   color: #e85412;
+}
+.transBtn{
+    
+    background-color: #050404;
+    color: white;
+    height: fit-content;
+    width: 120px;
+    border-radius: 20px;
+    margin: 50px auto;
+}
+ .trans{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    gap: 10px;
+}
+.input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+}
+.inputt{
+    background-color: #e85412;
+    color: white;
+    border: none;
+    border: 1px solid #e85412;
+    position: absolute;
+    cursor: pointer;
+    width: 7%;
+    height: 4%;
+    border-radius: 20px;
+
+}
+
+
+
