@@ -12,6 +12,9 @@
 <body>
     <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/bank/brief-8/app/models/ClassAgency.php");
+
+
+
 require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");
 
     $sql = "CREATE TABLE if not exists agency(
@@ -23,29 +26,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");
      FOREIGN KEY (bankId) REFERENCES bank(id)
         ON DELETE CASCADE ON UPDATE CASCADE 
     )";
-    if ($conn->query($sql) === TRUE) {  
-        //   echo "Table account created successfully";
-        } else {
-          echo "Error creating table: " . $conn->error;
-        }
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $agency = new Agency(); // Instanciez votre classe Agency ici
-        
-            $data = array(
-                'longitude' => $_POST['longitude'],
-                'latitude' => $_POST['latitude'],
-                'adresse' => $_POST['adresse'],
-                'bankId' => $_POST['bankId']
-            );
-        
-            $result = $agency->create($data);
-        
-            if ($result) {
-                echo "Les données de l'agence ont été ajoutées avec succès.";
-            } else {
-                echo "Erreur lors de l'ajout des données de l'agence.";
-            }
-        }
+
     ?>
     <?php
    require_once "../../../../public/navbar.php"
@@ -107,9 +88,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");
                 <img class="absolute top-3 right-9" src="icons8-effacer-30.png" id="hide">
                 
                 
-                <label for="id"></label>
-                <input class="px-5 py-2 rounded text-gray-300 bg-gray-700" type="text" name="bankId" placeholder="ID DE BANKE">
-                
                 <label for="devis"></label>
                 <input class="px-5 py-2 rounded text-gray-300 bg-gray-700 " type="text" name="longtitude" placeholder="LONGTITUDE">
                 
@@ -118,6 +96,22 @@ require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");
                 
                 <label for="nom"></label>
                 <input class="px-5 py-2 rounded text-gray-300 bg-gray-700" type="text" name="adresse" placeholder="ADRESSE">
+
+                <select id="accountID" name="accountID" class="w-[304px] block py-2.5 px-0 text-lg text-gray-900 bg-gray-800 p-2 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                  <option disabled selected value="" class="bg-dark-gray-800">Select bank</option>
+                  <?php
+                  $accountQuery = "SELECT id, nom FROM bank";
+                  $accountResult = $conn->query($accountQuery);
+
+                  if ($accountResult->num_rows > 0) {
+                      while ($row = $accountResult->fetch_assoc()) {
+                        echo "<option value='{$row['id']}'>{$row['nom']}</option>";
+                    }
+                  }
+                  
+                  ?>
+                  
+              </select>
                 <div>
                  <button class="px-8 py-2 rounded text-white bg-orange-700 " type="submit" name="submit" >Ajouter</button>
                  </div>

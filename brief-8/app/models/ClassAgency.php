@@ -14,7 +14,7 @@ class Agency {
     private $conn;
 
 
-            public __construct(){
+            public function __construct(){
                 global $conn;
                 $this->conn = $conn;
                 $this->conn->select_db("DB_CIH");
@@ -35,29 +35,25 @@ class Agency {
             public function setlaLitude($latitude){
                 $this->latitude = $latitude;
             }
-            public function grtLatitude()
+            public function getLatitude(){
             return $this->latitude;
-
-
-            public function setBalance($rib){
-                $this->rib = $rib;
             }
-            public function grtBalance()
-            return $this->rib;
 
-
-            public function setDevis($rib){
-                $this->rib = $rib;
+            public function setAdresse($address){
+                $this->address = $address;
             }
-            public function grtDevis()
-            return $this->rib;
+            public function getAdresse(){
+            return $address->address;
+            }
 
+            public function setBankId($bankId){
+                $this->bankId = $bankId;
+            }
+            public function getBankId(){
+            return $bankId->bankId;
+            }
             
-            public function setIdClient($rib){
-                $this->rib = $rib;
-            }
-            public function grtIdClient()
-            return $this->rib;
+         
 }
 
 

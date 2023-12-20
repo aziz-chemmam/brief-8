@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" href="../../../../public/style.css">
 
     <title>Document</title>
 </head>
 <body>
     <?php
-    require_once("../../../../DataService.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/bank/brief-8/app/models/ClasseTransaction.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");    
+
+
 
     $sql ="CREATE TABLE if not exists transactions(
-            id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            id VARCHAR(100)  PRIMARY KEY,
             montant VARCHAR(255) NOT NULL,
-            devis VARCHAR(255) NOT NULL,
             typpe VARCHAR(255) NOT NULL,
             IdCompte INT UNSIGNED,
             FOREIGN KEY (IdCompte) REFERENCES account(id)   
@@ -27,10 +29,26 @@
         } else {
           echo "Error creating table: " . $conn->error;
         }  
-   
-    ?>
+        if(isset($_POST['submit'])){
+            $transaction = new Transactions();
+            $transaction->setMontant($_POST['montant']);
+            $transaction->setType($_POST['typpe']);
+            $transaction->setAccountId($_POST['IdCompte']);
+            $transaction->addTransactions();
+           }
+          
+          $transactions = [];
+           $sql = "SELECT id, montant, typpe, IdCompte FROM transactions";
+           $result = $conn->query($sql);
+           if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $transactions[] = $row;
+            }
+           }
+          ?>
+
     <?php
-   require_once "../../../public/navbar.php"
+   require_once "../../../../public/navbar.php"
    ?>
     <div class="absolute flex flex-col justify-center top-0 ml-96 ">
     <button class="absolute top-9 bg-sky-950 px-5 py-2 rounded-lg text-white drop-shadow-lg	" id="button" type="submit">Ajouter un compte</button>
@@ -42,7 +60,6 @@
                     <td>ID</td> 
                     <td>ID DE COMPTE</td>  
                     <td>MONTANT</td>
-                    <td>DEVIS</td>
                     <td>TYPE</td>
                     <td>ACTION</td>
                 </tr>
@@ -61,12 +78,11 @@
                                 <td>{$row['id']}</td>
                                 <td>{$row['IdCompte']}</td>
                                 <td>{$row['montant']}</td>
-                                <td>{$row['devis']}</td>
                                 <td>{$row['typpe']}</td>
                                
                                 <td>
-                                    <a href='{$row["id"]}' class='font-bold text-white h-8 rounded cursor-pointer px-3 bg-gray-700 shadow-md transition ease-out duration-500 border-gray-700 '>EDIT</a>
-                                    <a href='transDel.php?id={$row["id"]}' class='font-bold text-white h-8 rounded  cursor-pointer px-2 bg-red-700 shadow-md transition ease-out duration-500 border-red-700 '>DELET</a>
+                                    <a href='transactionEdit.php?id={$row["id"]}' class='font-bold text-white h-8 rounded cursor-pointer px-3 bg-gray-700 shadow-md transition ease-out duration-500 border-gray-700 '>EDIT</a>
+                                    <a href='transactionDel.php?id={$row["id"]}' class='font-bold text-white h-8 rounded  cursor-pointer px-2 bg-red-700 shadow-md transition ease-out duration-500 border-red-700 '>DELET</a>
                                 </td>
           
                         </tr>";
@@ -101,7 +117,8 @@
                 </form>
     </div>
     </div>
-    <script src="../../../public/script.js"></script>
+    <script src="../../../../public/script.js"></script>
 
 </body>
 </html>
+

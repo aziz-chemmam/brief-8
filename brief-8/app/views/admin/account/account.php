@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" href="../../../../public/style.css">
 
     <title>Document</title>
 </head>
 <body>
 <?php 
-    require_once("../../../../DataService.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");    
 
     $sql= "CREATE TABLE if not exists account(
         id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -31,7 +31,7 @@
     ?>
 
     <?php
-   require_once "../../../public/navbar.php"
+   require_once "../../../../public/navbar.php"
    ?>
     <div class="absolute flex flex-col justify-center top-0 ml-96 ">
         <button class="absolute top-9 bg-sky-950 px-5 py-2 rounded-lg text-white drop-shadow-lg	" id="button" type="submit">Ajouter un compte</button>
