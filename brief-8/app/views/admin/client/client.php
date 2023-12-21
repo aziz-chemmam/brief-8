@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" href="../../../../public/style.css">
 
 
     <title>Document</title>
 </head>
 <body class="oferflow-y-hidden">
     <?php
-    require_once("../../../../DataService.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");    
    
     $sql= "CREATE TABLE if not exists  client(
-  id INT(10)   AUTO_INCREMENT PRIMARY KEY,
+  clientId INT(10) AUTO_INCREMENT PRIMARY KEY,
   nom VARCHAR(30) NOT NULL,
   prenom VARCHAR(255) NOT NULL,
   adresse VARCHAR(255) NOT NULL,
@@ -36,7 +36,7 @@
 ?>
     
     <?php
-   require_once "../../../public/navbar.php"
+   require_once "../../../../public/navbar.php"
    ?>
     <div class="absolute flex flex-col justify-center top-0 ml-[9%] ">
     <button class="absolute ml-48 top-9 bg-sky-950 px-5 py-2 rounded-lg text-white drop-shadow-lg	" id="button" type="submit">Ajouter un compte</button>

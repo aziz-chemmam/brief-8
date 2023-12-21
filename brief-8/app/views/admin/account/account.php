@@ -11,21 +11,42 @@
 <body>
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");    
+require_once($_SERVER['DOCUMENT_ROOT']."/bank/brief-8/app/models/ClassAccount.php");
 
-    $sql= "CREATE TABLE if not exists account(
-        id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        rib VARCHAR(255) NOT NULL,
-        balance VARCHAR(255) NOT NULL,
-        devis VARCHAR(255) NOT NULL, 
-        IdClient  INT,
-        FOREIGN KEY (IdClient) REFERENCES client(id)
+
+
+$sql= "CREATE TABLE if not exists account(
+    id INT(10) PRIMARY KEY,
+    rib VARCHAR(255) NOT NULL,
+    balance VARCHAR(255) NOT NULL,
+    devis VARCHAR(255) NOT NULL, 
+    idCustomer INT(10) NOT NULL,
+    FOREIGN KEY (idCustomer) REFERENCES client(clientId)
         ON DELETE CASCADE ON UPDATE CASCADE 
-    )";
+)";
+
+
 
     if ($conn->query($sql) === TRUE) {  
     //   echo "Table account created successfully";
     } else {
       echo "Error creating table: " . $conn->error;
+    }
+    if(isset($_POST['submit'])) {
+        $account = new Account();
+        $account -> setRib($_POST['rib']);
+        $account -> setBalance($_POST['balance']);
+        $account-> setDevis($_POST['devis']);
+        $account -> setIdCustomer(['idCustomer']);
+        $account-> addAccount();
+    }
+    $account = [];
+    $sql = "SELECT id,rib,balance,devis,idCustomer FROM account";
+    $result = $conn ->query($sql);
+    if($result->num_rows> 0){
+        while($row = $result->fetch_assoc()){
+            $account[] = $row;
+        }
     }
         
     ?>
@@ -58,7 +79,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");
                 while($row = mysqli_fetch_array($result)){
                   echo "<tr>
                                 <td>{$row['id']}</td>
-                                <td>{$row['IdClient']}</td>
+                                <td>{$row['idCustomer']}</td>
                                 <td>{$row['rib']}</td>
                                 <td>{$row['balance']}</td>
                                 <td>{$row['devis']}</td>
@@ -93,7 +114,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");
                     <input class="px-5 py-2 rounded text-gray-300 bg-gray-700" type="text" name="rib" placeholder="RIB">
                     
                     <label for="nom"></label>
-                    <input class="px-5 py-2 rounded text-gray-300 bg-gray-700" type="text" name="IdClient" placeholder="ID DE CLIENT">
+                    <input class="px-5 py-2 rounded text-gray-300 bg-gray-700" type="text" name="idCustomer" placeholder="ID DE CLIENT">
                     <div>
                     <button class="px-8 py-2 rounded text-white bg-orange-700 " type="submit" name="submit">Ajouter</button>
                 </div>
@@ -101,6 +122,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");
                 </div>
             
         </div>
-    <script src="../../../public/script.js"></script>
+    <script src="../../../../public/script.js"></script>
 </body>
 </html>

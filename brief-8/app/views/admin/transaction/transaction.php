@@ -19,7 +19,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");
             id VARCHAR(100)  PRIMARY KEY,
             montant VARCHAR(255) NOT NULL,
             typpe VARCHAR(255) NOT NULL,
-            IdCompte INT UNSIGNED,
+            IdCompte INT(10) NOT NULL,
             FOREIGN KEY (IdCompte) REFERENCES account(id)   
                 ON DELETE CASCADE ON UPDATE CASCADE 
         )";

@@ -49,7 +49,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/bank/DataService.php");
         public function addTransactions(){
             $this->id = $this->generateUniqueId();
             $stmt = $this->conn->prepare("INSERT INTO transactions (id, montant,  typpe, IdCompte) VALUES (?,  ?, ?, ?)");
-            $stmt->bind_param("ssss", $this->id, $this->montant, $this->type, $this->IdCompte);
+            $stmt->bind_param("sssi", $this->id, $this->montant, $this->type, $this->IdCompte);
             $stmt->execute();
             $stmt->close();
         }
